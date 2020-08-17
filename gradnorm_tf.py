@@ -194,6 +194,8 @@ with tf.variable_scope("loss_gradnorm"):
     a = tf.constant(alpha)
     C1 = tf.multiply(G_avg, tf.pow(inv_rate_1, a))
     C2 = tf.multiply(G_avg, tf.pow(inv_rate_2, a))
+    C1 = tf.stop_gradient(tf.identity(C1))
+    C2 = tf.stop_gradient(tf.identity(C2))
 
     # GradNorm loss (Eq. 2 in paper)
     loss_gradnorm = tf.add(
